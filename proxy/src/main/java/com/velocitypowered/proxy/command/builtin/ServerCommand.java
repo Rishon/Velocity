@@ -128,9 +128,9 @@ public class ServerCommand implements SimpleCommand {
     Stream<String> possibilities = server.getAllServers().stream()
             .map(rs -> rs.getServerInfo().getName());
 
-    if (currentArgs.length == 0) {
+    if (currentArgs.length == 0 && hasPermission(invocation)) {
       return possibilities.collect(Collectors.toList());
-    } else if (currentArgs.length == 1) {
+    } else if (currentArgs.length == 1 && hasPermission(invocation)) {
       return possibilities
           .filter(name -> name.regionMatches(true, 0, currentArgs[0], 0, currentArgs[0].length()))
           .collect(Collectors.toList());
